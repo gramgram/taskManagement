@@ -1,6 +1,6 @@
 package com.task.service;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -83,7 +83,7 @@ public class TaskService {
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value="update")
 	@ResponseBody
 	public Task updateTask(@RequestBody Task task) throws InterruptedException, ExecutionException {
-		task.setUpdatedAt(new Date(System.currentTimeMillis()));
+		task.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
 		Task response =  repository.save(task);
 		return CompletableFuture.completedFuture(response).get();
 	}

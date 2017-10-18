@@ -1,6 +1,6 @@
 package com.task.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="task")
@@ -21,6 +23,7 @@ public class Task {
 	@Column(name = "id")
 	private UUID id;*/
 	
+	private static final String TIMESTAMP_FORMAT= "yyyy-MM-dd HH:mm:ss.SSS";
 	
 	@GenericGenerator(
             name = "taskSequenceGenerator",
@@ -36,18 +39,21 @@ public class Task {
     @GeneratedValue(generator = "taskSequenceGenerator")
 	private long id;
 	
-	
+	@JsonFormat(pattern=TIMESTAMP_FORMAT)
 	@Column(name = "createdAt")
-	private Date createdAt;
+	private Timestamp createdAt;
 	
+	@JsonFormat(pattern=TIMESTAMP_FORMAT)
 	@Column(name = "updatedAt")
-	private Date updatedAt;
+	private Timestamp updatedAt;
 	
+	@JsonFormat(pattern=TIMESTAMP_FORMAT)
 	@Column(name = "dueAt")
-	private Date dueAt;
+	private Timestamp dueAt;
 	
+	@JsonFormat(pattern=TIMESTAMP_FORMAT)
 	@Column(name = "resolvedAt")
-	private Date resolvedAt;
+	private Timestamp resolvedAt;
 	
 	@Column(name = "title")
 	private String title;
@@ -70,35 +76,35 @@ public class Task {
 		this.id = id;
 	}
 
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public Date getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
-	public Date getDueAt() {
+	public Timestamp getDueAt() {
 		return dueAt;
 	}
 
-	public void setDueAt(Date dueAt) {
+	public void setDueAt(Timestamp dueAt) {
 		this.dueAt = dueAt;
 	}
 
-	public Date getResolvedAt() {
+	public Timestamp getResolvedAt() {
 		return resolvedAt;
 	}
 
-	public void setResolvedAt(Date resolvedAt) {
+	public void setResolvedAt(Timestamp resolvedAt) {
 		this.resolvedAt = resolvedAt;
 	}
 
@@ -138,7 +144,7 @@ public class Task {
 		
 	}
 	
-	public Task(long id, Date createdAt, Date updatedAt, Date dueAt, Date resolvedAt, 
+	public Task(long id, Timestamp createdAt, Timestamp updatedAt, Timestamp dueAt, Timestamp resolvedAt, 
 			String title, String description, int priority, String status) {
 		this.id = id;
 		this.createdAt = createdAt;

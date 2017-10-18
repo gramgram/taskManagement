@@ -61,7 +61,7 @@ public class TaskJob {
 		
 		Task task = new Task();
 		
-		task.setCreatedAt(new java.sql.Date(System.currentTimeMillis()));
+		task.setCreatedAt(new java.sql.Timestamp(System.currentTimeMillis()));
 		task.setDescription("description of " + randomString);
 		task.setPriority(1);
 		task.setTitle(randomString);
